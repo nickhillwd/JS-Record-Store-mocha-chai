@@ -53,6 +53,14 @@ describe('Record Store', function(){
     assert.equal(store2.balance, 0);
     assert.equal(store3.balance, 0);
   });
+  it('should have correct values in places after adding records', function(){
+    store1.addRecord(record1);
+    store1.addRecord(record2);
+    store1.addRecord(record3);
+    expect(store1.inventory.length).to.eql(3);
+    expect(store1.inventory[2]).to.be.an('object');
+    expect(store1.inventory[0]).to.have.property('artist').that.deep.equals('spice girls');
+  });
 })
 
 
