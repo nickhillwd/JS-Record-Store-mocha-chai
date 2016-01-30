@@ -18,6 +18,19 @@ RecordStore.prototype = {
       console.log('Price:      '+record.price);
       console.log('-'.repeat(50));
     }
+  },
+  search: function(albumTitle){
+    for(record of this.inventory){
+      var condition = record.title === (albumTitle.toLowerCase()) ? record : "No Such Album";
+      console.log('Artist:     '+record.artist);
+      console.log('Title:      '+record.title);
+      console.log('Price:      '+record.price);
+      console.log('-'.repeat(50));
+      return condition;
+    }
+  },
+  sell: function(record){
+    
   }
 }
 

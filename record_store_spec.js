@@ -76,7 +76,18 @@ describe('Record Store', function(){
     expect(store1.inventory[0]).to.have.property('price').that.deep.equals(parseFloat(10.00).toFixed(2));
     expect(store1.inventory[1]).to.have.property('price').that.deep.equals(parseFloat(5.00).toFixed(2));
     expect(store1.inventory[2]).to.have.property('price').that.deep.equals(parseFloat(7.50).toFixed(2));
-  })
+  });
+  it('should be able to search for a record by album title', function(){
+    store1.addRecord(record1);
+    var testSearch = store1.search("Spiceworld");
+    expect(testSearch).to.be.an('object');
+    expect(testSearch).to.have.property('title', 'spiceworld')
+  });
+  it('should be able to sell a record and bank the money', function(){
+    store1.addRecord(record1);
+    store1.sell(record);
+    assert.equal(store1.balance, 10.00)
+  });
 })
 
 
