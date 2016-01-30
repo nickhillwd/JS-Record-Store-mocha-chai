@@ -2,6 +2,7 @@ var RecordStore = function(storeName, city){
   this.storeName = storeName.toLowerCase();
   this.city = city.toLowerCase();
   this.inventory = [];
+  this.balance = 0
 }
 
 RecordStore.prototype = {

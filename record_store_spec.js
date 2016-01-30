@@ -48,4 +48,27 @@ describe('Record Store', function(){
     expect(store1.inventory[0]).to.be.an('object');
     expect(store2.inventory.length).to.eql(1);
   });
+  it('should have a till balance of 0 at start', function(){
+    assert.equal(store1.balance, 0);
+    assert.equal(store2.balance, 0);
+    assert.equal(store3.balance, 0);
+  });
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
