@@ -73,6 +73,9 @@ describe('Record Store', function(){
     expect(store1.inventory[0]).to.have.property('title').that.deep.equals('spiceworld');
     expect(store1.inventory[1]).to.have.property('title').that.deep.equals('the party album');
     expect(store1.inventory[2]).to.have.property('title').that.deep.equals("we didn't say that");
+    // expect(store1.inventory[0]).to.have.property('price').that.deep.equals(parseFloat(10.00).toFixed(2));
+    // expect(store1.inventory[1]).to.have.property('price').that.deep.equals(parseFloat(5.00).toFixed(2));
+    // expect(store1.inventory[2]).to.have.property('price').that.deep.equals(parseFloat(7.50).toFixed(2));
   });
   it('should be able to search for a record by album title', function(){
     store1.addRecord(record1);
@@ -83,7 +86,7 @@ describe('Record Store', function(){
   });
   it('should be able to sell a record and bank the money', function(){
     store1.addRecord(record1);
-    store1.sell(record);
+    store1.sell("Spiceworld");
     assert.equal(store1.balance, 10.00)
   });
 })

@@ -32,8 +32,9 @@ RecordStore.prototype = {
       return condition;
     }
   },
-  sell: function(record){
-    
+  sell: function(recordTitle){
+    record = this.search(recordTitle);
+    this.balance += record.price;
   }
 }
 
