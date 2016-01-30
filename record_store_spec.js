@@ -2,6 +2,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var expect = chai.expect;
 var should = chai.should;
+var _=require('lodash');
 
 var Record = require('./record.js');
 var RecordStore = require('./record_store.js');
@@ -28,8 +29,8 @@ describe('Record Store', function(){
     store2 = new RecordStore("Keith's Kool Tracks", "Edinburgh");
     store3 = new RecordStore("Val's Vivaldi Emporium", "Edinburgh");
     record1 = new Record("Spice Girls", "Spiceworld", 10.00);
-    record2 = new Record("Venga Boys", "The Psrty Album", "5.00");
-    record3 = new Record("Daphne and Clecste", "We Didn't Say That", 7.50);
+    record2 = new Record("Venga Boys", "The Party Album", "5.00");
+    record3 = new Record("Daphne and Clecste", "We Didn't Say That", "7.50");
   });
   afterEach(function(){
     store1.inventory = [];
@@ -61,6 +62,21 @@ describe('Record Store', function(){
     expect(store1.inventory[2]).to.be.an('object');
     expect(store1.inventory[0]).to.have.property('artist').that.deep.equals('spice girls');
   });
+  it('should list out a stores record inventory', function(){
+    store1.addRecord(record1);
+    store1.addRecord(record2);
+    store1.addRecord(record3);
+    store1.listInventory();
+    expect(store1.inventory[0]).to.have.property('artist').that.deep.equals('spice girls');
+    expect(store1.inventory[1]).to.have.property('artist').that.deep.equals('venga boys');
+    expect(store1.inventory[2]).to.have.property('artist').that.deep.equals('daphne and clecste');
+    expect(store1.inventory[0]).to.have.property('title').that.deep.equals('spiceworld');
+    expect(store1.inventory[1]).to.have.property('title').that.deep.equals('the party album');
+    expect(store1.inventory[2]).to.have.property('title').that.deep.equals("we didn't say that");
+    expect(store1.inventory[0]).to.have.property('price').that.deep.equals(parseFloat(10.00).toFixed(2));
+    expect(store1.inventory[1]).to.have.property('price').that.deep.equals(parseFloat(5.00).toFixed(2));
+    expect(store1.inventory[2]).to.have.property('price').that.deep.equals(parseFloat(7.50).toFixed(2));
+  })
 })
 
 
