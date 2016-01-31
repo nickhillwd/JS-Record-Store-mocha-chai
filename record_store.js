@@ -26,16 +26,46 @@ RecordStore.prototype = {
       this.print(record);    }
   },
   search: function(albumTitle){
-    for(record of this.inventory){
-      var condition = record.title === (albumTitle.toLowerCase()) ? record : "No Such Album";
-      this.print(condition);
-      return condition;
-    }
+    try{
+      for(record of this.inventory){
+        if(albumTitle.toLowerCase() === record.title){
+          this.print(record);
+          return record;
+        }else{
+          continue;
+        }
+      }
+    }catch(record){
+      if (record instanceof undefined){
+        console.log(record);
+        return "No such Record";
+      }
+    }    
   },
   sell: function(recordTitle){
     record = this.search(recordTitle);
     this.balance += record.price;
+  },
+  endOfDayReport: function(){
+    console.log("Total Takings " + Date.now() + ": £" + parseInt(this.balance).toFixed(2));
   }
 }
 
 module.exports = RecordStore;
+
+
+
+
+// var condition = record.title === (albumTitle.toLowerCase()) ? record : "No Such Album";
+
+
+
+
+
+
+
+
+
+
+
+
