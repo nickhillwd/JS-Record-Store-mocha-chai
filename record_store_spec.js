@@ -6,6 +6,7 @@ var _=require('lodash');
 
 var Record = require('./record.js');
 var RecordStore = require('./record_store.js');
+var RecordCollector = require('./record_collector');
 
 describe('Record', function(){
   beforeEach(function(){
@@ -85,12 +86,15 @@ describe('Record Store', function(){
     expect(testSearch).to.be.an('object');
     expect(testSearch).to.have.property('title', 'spiceworld');
     expect(testSearch2).to.have.property('title', 'The Party Album');
-
   });
   it('should be able to sell a record and bank the money', function(){
     store1.addRecord(record1);
+    console.log(store1.inventory.length);
     store1.sell("Spiceworld");
-    assert.equal(store1.balance, 10.00)
+    assert.equal(store1.balance, 10.00);
+    console.log(store1.balance);
+    console.log(store1.inventory.length);
+    expect(store1.inventory.length).to.eql(0);
   });
   it('should be able to report total takings', function(){
     store1.addRecord(record1);
@@ -104,6 +108,24 @@ describe('Record Store', function(){
   });
 })
 
+describe('Record Collector', function(){
+  beforeEach(function(){
+    jay = new RecordCollector('Jay', 200.00, 'Functino Time!');
+  });
+  it('should accept 3 parameters; collector name, cash, shift catch phrase', function(){
+    RecordCollector.collectorName = function(){};
+    expect(RecordCollector).itself.to.respondTo('collectorName');
+    RecordCollector.cash = function(){};
+    expect(RecordCollector).itself.to.respondTo('cash');
+    RecordCollector.shiftyCatchPhrase = function(){};
+    expect(RecordCollector).itself.to.respondTo('shiftyCatchPhrase');
+  });
+  it('should have a cash balance of £200', function(){
+    assert.equal(jay.cash, 200.00);
+  });
+  it('should be able it buy a record FROM a record store');
+  it('should be able to sell a record store one from his collection');
+})
 
 
 

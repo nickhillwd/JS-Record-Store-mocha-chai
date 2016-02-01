@@ -26,25 +26,38 @@ RecordStore.prototype = {
       this.print(record);    }
   },
   search: function(albumTitle){
-    try{
+    // try{
+    //   for(record of this.inventory){
+    //     if(albumTitle.toLowerCase() === record.title){
+    //       this.print(record);
+    //       return record;
+    //     }else{
+    //       continue;
+    //     }
+    //   }
+    // }catch(record){
+    //   if (record instanceof undefined){
+    //     console.log(record);
+    //     return "No such Record";
+    //   }
+    // }   
       for(record of this.inventory){
-        if(albumTitle.toLowerCase() === record.title){
+        console.log("FOR LOOP = " + albumTitle.toLowerCase() + " " + record.title);
+        if(albumTitle.toLowerCase().trim() === record.title.toLowerCase().trim()){
           this.print(record);
           return record;
-        }else{
-          continue;
         }
       }
-    }catch(record){
-      if (record instanceof undefined){
-        console.log(record);
-        return "No such Record";
-      }
-    }    
+ 
   },
   sell: function(recordTitle){
     record = this.search(recordTitle);
-    this.balance += record.price;
+    this.balance += record.price
+    for(var i = 0; i < this.inventory.length; i++){
+      if(i.title === recordTitle){
+      this.inventory.splice(i, 1);
+      }
+    }
   },
   endOfDayReport: function(){
     console.log("Total Takings " + Date.now() + ": £" + parseInt(this.balance).toFixed(2));
