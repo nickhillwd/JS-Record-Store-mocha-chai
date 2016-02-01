@@ -54,8 +54,8 @@ RecordStore.prototype = {
     record = this.search(recordTitle);
     this.balance += record.price
     for(var i = 0; i < this.inventory.length; i++){
-      if(i.title === recordTitle){
-      this.inventory.splice(i, 1);
+      if(this.inventory[i].title === recordTitle){
+        this.inventory.splice(i, 1);
       }
     }
   },

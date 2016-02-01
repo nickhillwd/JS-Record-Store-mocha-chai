@@ -11,7 +11,7 @@ var RecordCollector = require('./record_collector');
 describe('Record', function(){
   beforeEach(function(){
     record1 = new Record("Spice Girls", "Spiceworld", 10.00);
-    record2 = new Record("Venga Boys", "The Party Album", "5.00");
+    record2 = new Record("Venga Boys", "The Party Album", 5.00);
     record3 = new Record("Daphne and Clecste", "We Didn't Say That", 7.50);
   });
   it('should accept 3 parameters; artist, title, price', function(){
@@ -30,8 +30,8 @@ describe('Record Store', function(){
     store2 = new RecordStore("Keith's Kool Tracks", "Edinburgh");
     store3 = new RecordStore("Val's Vivaldi Emporium", "Edinburgh");
     record1 = new Record("Spice Girls", "Spiceworld", 10.00);
-    record2 = new Record("Venga Boys", "The Party Album", "5.00");
-    record3 = new Record("Daphne and Clecste", "We Didn't Say That", "7.50");
+    record2 = new Record("Venga Boys", "The Party Album", 5.00);
+    record3 = new Record("Daphne and Clecste", "We Didn't Say That", 7.50);
   });
   afterEach(function(){
     store1.inventory = [];
@@ -80,17 +80,17 @@ describe('Record Store', function(){
   });
   it('should be able to search for a record by album title', function(){
     store1.addRecord(record1);
-    store2.addRecord(record2);
+    store1.addRecord(record2);
     var testSearch = store1.search("Spiceworld");
     var testSearch2 = store1.search("The Party Album");
     expect(testSearch).to.be.an('object');
     expect(testSearch).to.have.property('title', 'spiceworld');
-    expect(testSearch2).to.have.property('title', 'The Party Album');
+    expect(testSearch2).to.have.property('title', 'the party album');
   });
   it('should be able to sell a record and bank the money', function(){
     store1.addRecord(record1);
     console.log(store1.inventory.length);
-    store1.sell("Spiceworld");
+    store1.sell("spiceworld");
     assert.equal(store1.balance, 10.00);
     console.log(store1.balance);
     console.log(store1.inventory.length);
@@ -112,7 +112,7 @@ describe('Record Collector', function(){
   beforeEach(function(){
     jay = new RecordCollector('Jay', 200.00, 'Functino Time!');
   });
-  it('should accept 3 parameters; collector name, cash, shift catch phrase', function(){
+  it('should accept 3 parameters; collector name, cash, shifty catch phrase', function(){
     RecordCollector.collectorName = function(){};
     expect(RecordCollector).itself.to.respondTo('collectorName');
     RecordCollector.cash = function(){};
